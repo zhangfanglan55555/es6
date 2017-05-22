@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>let</title>
+</head>
+<body>
+    <h2>es6新增的let声明方式，专用于变量的声明，let有了块级作用域的概念。</h2>
+    <h2>它只在其声明的作用域起作用，超出范围的变为‘undefined'</h2>
+    <h2>不存在变量提升，如果未声明就使用会报错</h2>
+    <h2>if和for这种都存在自己的作用域，不再是同一window作用域下的了</h2>
+    <h2>如果是从未生命过的变量typeof不会报错，但如果是声明在typeof执行之后就会报错</h2>
+    <h2>暂时性死区：let x = x;会报错，不能够在声明前使用，因为执行顺序是先右后左</h2>
+    <h2>不允许在相同作用域内，重复声明同一个变量。
+        function a (arg){
+            let arg ;//报错
+        }
+        function a(arg){
+            {
+                let arg;//不报错，不是同一个作用域了。
+            }
+        }
+    </h2>
+    <script>
+        {
+            let a = '1';
+            var b = 2;
+        }
+        console.log(a);//a is not defined,;
+        console.log(b);
+
+        a = [];
+        for(var i = 0;i<10 ;i++){
+            a[i] = function(){
+                console.log(i);
+            }
+        }
+        a[6]();//输出10；因为i是全局作用域下的，每次a[i]都会覆盖上一次的，
+        //执行顺序：a[6] 结果： function(){console.log(i}
+                    ()    ：调用函数，i最后的值是10；
+
+
+        //用let:
+        b = [];
+        for(let j = 0; j<10;j++){
+            b[j] = function(){
+                console.log(j);
+            }
+        }
+        b[6](); //6
+
+
+
+
+
+    </script>
+</body>
+</html>
